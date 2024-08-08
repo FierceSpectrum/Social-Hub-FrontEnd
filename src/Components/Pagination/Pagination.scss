@@ -1,0 +1,37 @@
+@import '../../Styles/Variables/colors.scss';
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .page-link:hover {
+    background-color: #f0f0f0;
+  }
+  .current-page {
+    animation: colorChange 1.5s infinite alternate;
+  }
+  
+  @keyframes colorChange {
+    0% {
+        background-color: $color-nav-box2;
+    }
+
+    100% {
+        background-color: $color-nav-box;
+    }
+}

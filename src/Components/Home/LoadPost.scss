@@ -1,0 +1,172 @@
+@import '../../Styles/Variables/colors.scss';
+
+.posts {
+    color: #fff;
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 80px;
+    }
+
+    .checkbox {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: #f2f2f2;
+
+            /* Puedes ajustar el color de fondo según tus preferencias */
+            .search-input {
+                border: none;
+                border-radius: 15px;
+                padding: 8px;
+                margin-right: 10px;
+                width: 200px;
+                outline: none;
+                mix-blend-mode: multiply;
+                /* Ajusta el ancho según tus necesidades */
+            }
+
+            .search-button {
+                border: none;
+                background: none;
+                cursor: pointer;
+            }
+
+            .lupa {
+                width: 30px;
+                height: 30px;
+                background-color: transparent;
+                mix-blend-mode: multiply;
+            }
+        }
+
+
+        .lable {
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+
+
+        .content-input input,
+        .content-select select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .content-input input {
+            visibility: hidden;
+            position: absolute;
+            right: 0;
+
+        }
+
+        .content-input {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 5px 0 5px 60px;
+            display: block;
+        }
+
+        .content-input input+i {
+            background: #f0f0f0;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: changeColor 1.5s infinite alternate;
+        }
+
+        .content-input input[type=checkbox]:checked+i {
+            animation: colorChange 1.5s infinite alternate;
+        }
+
+        .content-input input[type=checkbox]+i:after {
+            content: 'ALL';
+            position: absolute;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            top: 8px;
+            left: 4px;
+        }
+
+        .content-input input[type=checkbox]:checked+i:after {
+            opacity: 1;
+        }
+
+        .content-input input[type=checkbox]+i {
+            width: 52px;
+            height: 30px;
+            border-radius: 15px;
+            transition: all 0.25s ease;
+        }
+
+        .content-input input[type=checkbox]+i:before {
+            content: '';
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 1;
+            left: 0px;
+            top: 0px;
+            -webkit-box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.25s ease;
+        }
+
+        .content-input input[type=checkbox]:checked+i:before {
+            left: 22px;
+            -webkit-box-shadow: -3px 0 3px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 3px 0 -3px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.25s ease;
+        }
+
+
+    }
+
+    .containerPost {
+        width: 100%;
+        height: 100%;
+        padding-top: 5%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes changeColor {
+    0% {
+        box-shadow: 0px 5px 5px $color-nav-box2;
+    }
+
+    100% {
+        box-shadow: 0px 5px 5px $color-nav-box;
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        background: $color-nav-box2;
+    }
+
+    100% {
+        background: $color-nav-box;
+    }
+}
