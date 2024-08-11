@@ -1,4 +1,9 @@
 import React from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { Tooltip } from "react-tooltip";
+
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Posts.scss";
 import imgedit from "../../Accets/Lapiz.png";
@@ -7,11 +12,6 @@ const Posts = ({ posts, loading, setSearchTerm }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isEditable = !location.pathname.toLowerCase().includes("/post");
-
-  const handlePostClick = (postId, event) => {
-    event.stopPropagation();
-    navigate(`/Post/${postId}`);
-  };
 
   const handleEditClick = (postId, event) => {
     event.stopPropagation();
@@ -45,16 +45,7 @@ const Posts = ({ posts, loading, setSearchTerm }) => {
   return (
     <ul className="posts">
       {posts.map((post) => (
-        <li
-          key={post.id}
-          className="post"
-          data-id={post.id}
-          onClick={
-            post.state !== "Posted"
-              ? (event) => handlePostClick(post.id, event)
-              : console.log()
-          }
-        >
+        <li key={post.id} className="post" data-id={post.id}>
           <div className="card">
             <div className="post-content">
               <h2>{post.title}</h2>
@@ -64,13 +55,26 @@ const Posts = ({ posts, loading, setSearchTerm }) => {
               <ul className="social-networks">
                 {post.socialNetworks && post.socialNetworks.length > 0 ? (
                   post.socialNetworks.map((socialNetwork, index) => (
-                    <li
-                      key={index}
-                      onClick={(event) =>
-                        handleSocialNetworkClick(socialNetwork.name, event)
-                      }
-                    >
-                      {socialNetwork.name}
+                    <li key={index}>
+                      <span
+                        onClick={(event) =>
+                          handleSocialNetworkClick(socialNetwork.name, event)
+                        }
+                      >
+                        {socialNetwork.name}
+                      </span>
+                      {socialNetwork.state === "Failed" && (
+                        <span className="social-network-error">
+                          <FontAwesomeIcon
+                            icon={faExclamationCircle}
+                            data-tooltip-id={`tooltip-${index}`}
+                          />
+                          <Tooltip
+                            id={`tooltip-${index}`}
+                            content={`This post failed to send to ${socialNetwork.name}`}
+                          />
+                        </span>
+                      )}
                     </li>
                   ))
                 ) : (

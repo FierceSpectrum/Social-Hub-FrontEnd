@@ -1,0 +1,146 @@
+@import '../../../Styles/Variables/colors.scss';
+
+
+@keyframes changeColor2 {
+    0% {
+        box-shadow: 5px 0px 5px $color-nav-box2;
+    }
+
+    100% {
+        box-shadow: 5px 0px 5px $color-nav-box;
+    }
+}
+
+.NavCell {
+    display: flex;
+    width: 100%;
+
+    .MenuHB {
+        justify-content: space-between;
+        align-items: center;
+        height: 62px;
+        display: block;
+
+        .checkbox {
+            position: absolute;
+            display: block;
+            height: 32px;
+            width: 32px;
+            top: 35px;
+            left: 35px;
+            z-index: 5;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .Menu {
+            height: 26px;
+            width: 32px;
+            position: absolute;
+            top: 35px;
+            left: 35px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .line {
+                height: 4px;
+                width: 100%;
+                border-radius: 10px;
+                background: #ffffff;
+            }
+
+            .line1 {
+                transform-origin: 0% 0%;
+                transition: transform 0.4s ease-in-out;
+            }
+
+            .line2 {
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .line3 {
+                transform-origin: 0% 100%;
+                transition: transform 0.4s ease-in-out;
+            }
+
+        }
+
+        input[type="checkbox"]:checked~ {
+            .NavItems {
+                transform:  translateX(0);
+            }
+
+            .Menu {
+                .line1 {
+                    transform: rotate(45deg);
+                }
+
+                .line2 {
+                    opacity: 0;
+                }
+
+                .line3 {
+                    transform: rotate(-45deg);
+                }
+            }
+
+        }
+
+        .NavItems {
+
+            padding-top: 120px;
+            height: 100vh;
+            width: 150%;
+            transform: translate(-150%);
+            display: flex;
+            margin-top: -15px;
+            flex-direction: column;
+            margin-left: -50px;
+            padding-left: 50px;
+            transition: transform 0.5s ease-in-out;
+            background-color: $color-nav;
+            animation: changeColor2 1.5s infinite alternate;
+
+
+            .Items {
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    color: 333333;
+                    text-decoration: none;
+                    font-size: 25px;
+                    font-weight: bold;
+                    padding: 7px;
+                    border-radius: 15px;
+                    transition: background-color 0.3s ease;
+
+                    &.M {
+                        list-style: none;
+                        padding: 10px;
+                        font-size: 1.5rem;
+                    }
+
+                    a {
+                        color: $color-secundario;
+                        text-decoration: none;
+                        font-size: 25px;
+                        font-weight: bold;
+                        padding: 7px;
+                        border-radius: 15px;
+                        transition: background-color 0.3s ease;
+
+                        &:hover{
+                            background-color: $color-primario;
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+    }
+}

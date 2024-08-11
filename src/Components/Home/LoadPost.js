@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Posts from "../Posts/Posts";
 import Pagination from "../Pagination/Pagination";
+import Header from "../Header/Header";
 import Lupa from "../../Accets/Lupa.png";
 import "./LoadPost.scss";
 
@@ -52,17 +53,17 @@ const LoadPost = () => {
 
   function formatPostDate(dateString) {
     const options = {
-      weekday: 'long',  // Day of the week
-      year: 'numeric',  // Full year
-      month: 'long',    // Full month name
-      day: 'numeric',   // Day of the month
-      hour: 'numeric',  // Hour
-      minute: 'numeric', // Minute
+      weekday: "long", // Day of the week
+      year: "numeric", // Full year
+      month: "long", // Full month name
+      day: "numeric", // Day of the month
+      hour: "numeric", // Hour
+      minute: "numeric", // Minute
     };
-  
+
     const date = new Date(dateString);
-  
-    return date.toLocaleDateString('en-US', options);
+
+    return date.toLocaleDateString("en-US", options);
   }
 
   const handleSearch = useCallback(() => {
@@ -115,43 +116,46 @@ const LoadPost = () => {
   }, [filteredPosts, currentPage, postsPerPage]);
 
   return (
-    <div className="posts">
-      <h1 className="title">All Posts</h1>
-      <div className="checkbox">
-        <div className="search-container">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
+    <>
+      <Header />
+      <div className="posts">
+        <h1 className="title">All Posts</h1>
+        <div className="checkbox">
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+            />
+            <button className="clear-button" onClick={handleClearSearch}>
+              &times;
+            </button>
+            <button className="search-button" onClick={handleSearch}>
+              <img src={Lupa} alt="Search" className="lupa" />
+            </button>
+          </div>
+        </div>
+        <div className="containerPost" id="posts">
+          <Posts
+            posts={currentPosts}
+            loading={loading}
+            setSearchTerm={setSearchTerm}
           />
-          <button className="clear-button" onClick={handleClearSearch}>
-            &times;
-          </button>
-          <button className="search-button" onClick={handleSearch}>
-            <img src={Lupa} alt="Search" className="lupa" />
-          </button>
+        </div>
+        <div className="pagination">
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={filteredPosts.length}
+            paginate={setCurrentPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </div>
       </div>
-      <div className="containerPost" id="posts">
-        <Posts
-          posts={currentPosts}
-          loading={loading}
-          setSearchTerm={setSearchTerm}
-        />
-      </div>
-      <div className="pagination">
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={filteredPosts.length}
-          paginate={setCurrentPage}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

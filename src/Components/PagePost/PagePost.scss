@@ -1,0 +1,217 @@
+@import '../../Styles/Mixins/media-queries.scss';
+@import '../../Styles/Variables/brakpoints.scss';
+@import '../../Styles/Variables/colors.scss';
+
+.pagepost {
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+
+    .card {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(60deg, $color-primario 0%, $color-nav-select 100%);
+        overflow: hidden;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px $color-background;
+        cursor: pointer;
+
+        .post-content {
+            padding-bottom: 20px;
+
+            .title {
+                font-size: 30px;
+                color: #fff;
+                transition: 0.2s ease;
+                text-shadow: 0 0 15px $color-background;
+                padding-bottom: 10px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                input {
+                    font-size: 30px;
+                    margin-left: 10px;
+                    padding-left: 15px;
+                    color: #fff;
+                    background-color: $color-nav-select;
+                    border-radius: 20px;
+                }
+            }
+
+            .content {
+                margin-top: 15px;
+                width: 80%;
+                margin-left: 10%;
+                color: #fff;
+                font-size: 20px;
+                text-align: justify;
+                letter-spacing: 1px;
+                transition: 0.2s ease;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                textarea {
+                    width: 100%;
+                    color: #fff;
+                    font-size: 20px;
+                    resize: none;
+                    field-sizing: content;
+                    min-height: 5lh;
+
+
+                    margin-left: 10px;
+                    padding-top: 10px;
+                    padding-left: 15px;
+                    background-color: $color-nav-select;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        .post-info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .post-social-networks {
+
+                label {
+                    font-size: 15px;
+                    color: #fff;
+                }
+
+                .social-networks {
+                    flex: 1;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    padding: 10px 0 10px 0;
+
+                    li {
+                        margin: 5px;
+                        text-transform: uppercase;
+                        color: $color-secundario;
+                        display: inline-block;
+                        padding: 6px 12px;
+                        font-size: 15px;
+                        border: 1px solid $color-secundario;
+                        border-radius: 24px;
+                        background-color: $color-primario;
+                        outline: none;
+                        text-decoration: none;
+
+                        button {
+                            color: $color-primario;
+                            font-size: 15px;
+                            margin-left: 5px;
+                            border-radius: 24px;
+                            padding: 2px;
+                            border: 1px solid $color-secundario;
+                        }
+                    }
+                }
+
+                .available-networks {
+
+                    ul {
+
+                        button {
+                            margin: 5px;
+                            text-transform: uppercase;
+                            color: $color-secundario;
+                            display: inline-block;
+                            padding: 6px 12px;
+                            font-size: 15px;
+                            border: 1px solid $color-secundario;
+                            border-radius: 24px;
+                            outline: none;
+                            text-decoration: none;
+                        }
+
+                        .abled {
+                            animation: colorChange 1.5s infinite alternate;
+                        }
+
+                        .disabled {
+                            background-color: $color-primario;
+                            color: #444343;
+                            border: 1px solid #444343;
+                        }
+                    }
+
+                }
+            }
+
+            .post-status {
+                margin-left: auto;
+                margin-right: 1rem;
+
+                .status {
+                    padding: 7px;
+                    border-radius: 30px;
+                    animation: colorChange 1.5s infinite alternate;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    select,
+                    input {
+
+                        border-radius: 30px;
+                        animation: colorChange 1.5s infinite alternate;
+
+                        padding: 5px;
+                        margin-left: 5px;
+                        background-color: $color-nav-select;
+                        border-radius: 20px;
+
+                        background: transparent;
+                    }
+                }
+            }
+
+            .button {
+                width: 35px;
+                height: 35px;
+                border-radius: 30px;
+                animation: colorChange 1.5s infinite alternate;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .edit-icon {
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+
+            .edit-post {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 1rem;
+
+                &.visible {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    @keyframes colorChange {
+        0% {
+            background-color: $color-nav-box2;
+        }
+
+        100% {
+            background-color: $color-nav-box;
+        }
+    }
+}

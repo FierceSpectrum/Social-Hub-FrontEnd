@@ -1,0 +1,48 @@
+@import '../../Styles/Mixins/media-queries.scss';
+@import '../../Styles/Variables/brakpoints.scss';
+@import '../../Styles/Variables/colors.scss';
+
+
+@keyframes changeColor {
+    0% {
+        box-shadow: 0px 5px 5px $color-nav-box2;
+    }
+
+    100% {
+        box-shadow: 0px 5px 5px $color-nav-box;
+    }
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: $color-nav;
+    box-shadow: 0px 5px 5px $color-background;
+    animation: changeColor 1.5s infinite alternate;
+
+    .header {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .navi {
+            text-align: left;
+        }
+
+        .user {
+            text-align: right;
+        }
+    }
+}
+
+@include respond-to($desktop) {
+    .nav-bar {
+        position: sticky;
+        padding: 0;
+        z-index: 100;
+
+    }
+
+}

@@ -3,13 +3,16 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScheduleTable from "./Components/ScheduleTable/ScheduleTable";
+import PagePostEdit from "./Components/PagePostEdit/PagePostEdit";
+import PagePost from "./Components/PagePost/PagePost";
 import Home from "./Components/Home/LoadPost";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 
 function App() {
-  const [logueado, setLogueado] = useState(localStorage.getItem("Login"));
-  const [user, setUser] = useState(localStorage.getItem("User"));
+  const [logueado, setLogueado] = useState(localStorage.getItem("Login")??"False");
+  const [user, setUser] = useState(localStorage.getItem("UserId"));
   const [sessionExpired, setSessionExpired] = useState(false);
 
   // useEffect(() => {
@@ -27,7 +30,7 @@ function App() {
     window.fetch = function (...args) {
       return originalFetch(...args)
       .then((response) => {
-          if (response.status === 401) {
+        if (response.status === 401) {
             // Marcar la sesión como expirada solo si el error es de autenticación
             response.json().then((data) => {
               if (data.error === "Invalid token." || data.message === "No token provided") {
@@ -54,11 +57,11 @@ function App() {
     if (sessionExpired) {
       toast.error("Se expiró el tiempo de tu sesión");
       setTimeout(() => {
-        localStorage.clear();
+        // localStorage.clear();
         setLogueado(null);
         setUser(null);
         setSessionExpired(false);
-        window.location.href = "/Login";
+        // window.location.href = "/Login";
       }, 2000);
     }
   }, [sessionExpired]);
@@ -88,12 +91,15 @@ function App() {
             path="/"
             element={
               logueado && user ? (
-                <Navigate to="/Profiles" />
+                <Navigate to="/Home" />
               ) : (
                 <Navigate to="/Login" />
               )
             }
           />
+          <Route path="/Schedule" element={<ScheduleTable />} />
+          <Route path="/Post/:postId/Edit" element={<PagePostEdit />} />
+          <Route path="/Post" element={<PagePost />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />

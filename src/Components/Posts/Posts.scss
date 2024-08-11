@@ -64,6 +64,17 @@
           background-color: $color-primario;
           outline: none;
           text-decoration: none;
+
+          .social-network-error {
+            margin-left: 8px;
+            color: red;
+            cursor: pointer;
+          }
+          
+          .social-network-error .fa-exclamation-circle {
+            font-size: 1.2rem;
+          }
+          
         }
       }
 

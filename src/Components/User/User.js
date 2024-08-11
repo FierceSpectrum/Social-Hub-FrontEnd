@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 const User = () => {
   const [isValidImage, setIsValidImage] = useState(false);
+  const [datauser, setDatauser] = useState({});
   const navigate = useNavigate();
   // const { logeado, setLogeado } = useContext(AppContext);
 
-  const datauser = JSON.parse(localStorage.getItem("Account"));
+  const userId = JSON.parse(localStorage.getItem("UserId"));
 
   const handleLogout = () => {
     // setLogeado(false);
@@ -18,6 +19,25 @@ const User = () => {
   };
 
   useEffect(() => {
+    const fetchLinkedSocialMedia = async () => {
+      try {
+        const url = `http://socialhub.codementoria.fsg/api/users/ById?id=${userId}`;
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch user");
+
+        const data = await response.json();
+        await setDatauser(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchLinkedSocialMedia();
     const image = new Image();
     image.src = datauser.avatar;
     image.onload = () => {
@@ -26,7 +46,7 @@ const User = () => {
     image.onerror = () => {
       setIsValidImage(false);
     };
-  }, [datauser]);
+  }, []);
 
   const [menuVisible, setMenuVisible] = useState(false);
 
