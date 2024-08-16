@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
+import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import "./ScheduleTable.scss";
-
-Modal.setAppElement("#root");
 
 function ScheduleTable() {
   const userId = JSON.parse(localStorage.getItem("UserId"));
@@ -195,13 +193,7 @@ function ScheduleTable() {
           </table>
           <button onClick={handleSave}>Guardar Cronograma</button>
 
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Edit Time"
-            className="modal"
-            overlayClassName="modal-overlay"
-          >
+          <Modal isOpen={modalIsOpen} onClose={closeModal}>
             <h2>{selectedTimeIndex !== null ? "Edit Time" : "Add Time"}</h2>
             <input
               type="time"
@@ -210,13 +202,13 @@ function ScheduleTable() {
               className="time-input"
             />
             <div className="modal-buttons">
-              <button onClick={handleSaveTime}>Save</button>
+              <button onClick={closeModal}>Cancel</button>
               {selectedTimeIndex !== null && (
                 <button className="delete-time" onClick={handleDeleteTime}>
                   Delete Time
                 </button>
               )}
-              <button onClick={closeModal}>Cancel</button>
+              <button onClick={handleSaveTime}>Save</button>
             </div>
           </Modal>
         </div>

@@ -1,0 +1,38 @@
+/* Estilo para el contenedor del modal */
+#modal-root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    transition: visibility 0s, opacity 0.3s linear;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+
+    &.open {
+        visibility: visible;
+        opacity: 1;
+    }
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+    
+    .modal {
+        position: relative;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 10001;
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
