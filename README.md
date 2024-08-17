@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# Social Hub - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este repositorio contiene el frontend de la aplicación **Social Hub**, una plataforma para gestionar publicaciones en múltiples redes sociales. El frontend está desarrollado con React y utiliza SCSS para el diseño.
 
-## Available Scripts
+## Estructura del Proyecto
 
-In the project directory, you can run:
+El frontend de Social Hub se organiza en varios componentes que gestionan diferentes aspectos de la aplicación, desde la autenticación hasta la gestión de posts. A continuación se describe cada componente clave y su funcionalidad:
 
-### `npm start`
+### Componentes Principales
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User**: Muestra la información del usuario y un menú desplegable para acciones como cerrar sesión, configurar redes sociales y activar el segundo factor de autenticación (2FA). Este componente se encuentra dentro del `Navigation`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Navigation**: Incluye dos subcomponentes:
+  - **Hamburger Menu**: Un menú desplegable para dispositivos móviles.
+  - **Navigation**: Barra de navegación principal para las páginas del sitio (Home, Create Post, Cronograma).
 
-### `npm test`
+- **Header**: Une los componentes `User` y `Navigation`, y es la cabecera de la aplicación.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **SocialMediaPage**: Maneja la visualización de las redes sociales vinculadas por el usuario. Permite al usuario ver qué redes sociales tiene vinculadas y gestionar la vinculación de nuevas redes.
 
-### `npm run build`
+- **SecondFactor**: Componente que maneja la activación y desactivación del segundo factor de autenticación (2FA). Este componente es invocado por `User` y presenta una interfaz con un checkbox para habilitar o deshabilitar el 2FA, mostrando un código QR y un campo para introducir el PIN.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **ScheduleTable**: Muestra el cronograma del usuario en forma de tabla, permitiendo la edición, creación y eliminación de horarios específicos, pero no de la tabla completa.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **RoutesHandle**: Maneja las rutas para la vinculación de redes sociales. Este componente redirige a `SocialMediaPage` con los parámetros necesarios para realizar la vinculación del usuario con un servicio específico (por ejemplo, Twitter, Mastodon).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Register**: Componente para el registro de nuevos usuarios.
 
-### `npm run eject`
+- **Post**: Muestra una lista de publicaciones del usuario. Este componente maneja la visualización de los posts cargados desde el backend.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Pagination**: Componente de paginación para manejar la navegación entre diferentes páginas de posts en la `Home`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **PagePost**: Página para la creación de nuevos posts. Muestra un formulario donde el usuario puede crear un post, seleccionar las redes sociales a las que se enviará, establecer el estado (en cola, pendiente, programado, etc.), y definir la fecha y el título.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **PagePostEdit**: Similar a `PagePost`, pero para editar posts existentes que aún no se han publicado. Los posts ya publicados no pueden ser editados.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Modal**: Componente para mostrar modales. Utiliza un `div` con el ID `root-modal` en el HTML para renderizarse en el centro de la pantalla.
 
-## Learn More
+- **Login**: Componente para el inicio de sesión de los usuarios.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Home**: Página principal de la aplicación. Carga todos los posts del usuario y los muestra utilizando los componentes `Post` y `Pagination`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Forms**: Carpeta que contiene varios componentes de formulario reutilizables como `Pin`, `Phone`, `Password`, `Name`, `VerifCode`, `VerifPin`, `Country`, entre otros.
 
-### Code Splitting
+### Estilos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Los estilos de la aplicación se organizan de la siguiente manera:
 
-### Analyzing the Bundle Size
+- **Mixes**: Contiene mixins de CSS.
+- **Variables**: Define variables de CSS para colores y puntos de ruptura (`breakpoints`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Assets
 
-### Making a Progressive Web App
+- **Iconos y Imágenes**: Contiene imágenes como un lápiz para editar posts, una lupa para el buscador, y un perfil de usuario predeterminado (`user-profile.svg`) para cuando no hay imagen de usuario disponible.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Dependencias
 
-### Advanced Configuration
+El proyecto utiliza las siguientes dependencias:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `@arc-view/react`
+- `@class-variance-authority/cls`
+- `@framermotion`
+- `@lucid/react`
+- `@path-browserify`
+- `react`
+- `react-dom`
+- `react-modal`
+- `react-scripts`
+- `react-tooltip`
+- `sass`
+- `styled-system`
+- `web-vitals`
+- `react-router-dom` (para manejo de rutas)
 
-### Deployment
+## Instalación
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Clona el repositorio: `git clone https://github.com/FierceSpectrum/Social-Hub-FrontEnd`
+2. Navega al directorio del proyecto: `cd Social-Hub-FrontEnd`
+3. Instala las dependencias: `npm install`
+4. Inicia la aplicación: `npm start`
 
-### `npm run build` fails to minify
+## Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto no tiene una licencia formal y fue creado con fines educativos. No está destinado para uso comercial.
+
+
