@@ -17,7 +17,11 @@ function App() {
   const [user, setUser] = useState(localStorage.getItem("UserId"));
 
   useEffect(() => {
-    if ((!logueado || !user) && window.location.pathname !== "/Login") {
+    if (
+      (!logueado || !user) &&
+      window.location.pathname !== "/Login" &&
+      window.location.pathname !== "/Register"
+    ) {
       window.location.href = "/Login";
     }
   }, [logueado, user]);

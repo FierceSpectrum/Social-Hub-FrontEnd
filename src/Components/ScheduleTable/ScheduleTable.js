@@ -44,9 +44,14 @@ function ScheduleTable() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        if (!response.ok) throw new Error("Failed to fetch schedule");
+        let data = await response.json();
+        if (!response.ok) {
+          if (data.message !== "Schedule not found") {
+            throw new Error("Failed to fetch schedule");
+          }
+          data = null
+        }
 
-        const data = await response.json();
         if (data) {
           setSchedule(data);
           setScheduleExists(true);
