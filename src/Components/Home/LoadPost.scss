@@ -146,6 +146,26 @@
 
     }
 
+    .Options-Search {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .post-status {
+            padding: 25px 15px 0 15px;
+
+            .status {
+                padding: 7px 10px;
+                border-radius: 30px;
+                background-color: $color-background;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
     .containerPost {
         width: 100%;
         height: 100%;

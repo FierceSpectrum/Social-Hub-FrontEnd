@@ -66,6 +66,11 @@ const LoadPost = () => {
     return date.toLocaleDateString("en-US", options);
   }
 
+  const handleSocialNetworkClick = (tag, event) => {
+    event.stopPropagation();
+    setSearchTerm(tag);
+  };
+
   const handleSearch = useCallback(() => {
     if (searchTerm.trim()) {
       const filtered = posts.filter((post) => {
@@ -136,6 +141,26 @@ const LoadPost = () => {
             <button className="search-button" onClick={handleSearch}>
               <img src={Lupa} alt="Search" className="lupa" />
             </button>
+          </div>
+        </div>
+        <div className="Options-Search">
+          <div
+            className="post-status"
+            onClick={(event) => handleSocialNetworkClick("Posted", event)}
+          >
+            <span className="status">{"Posted"}</span>
+          </div>
+          <div
+            className="post-status"
+            onClick={(event) => handleSocialNetworkClick("Schedule", event)}
+          >
+            <span className="status">{"Schecule"}</span>
+          </div>
+          <div
+            className="post-status"
+            onClick={(event) => handleSocialNetworkClick("Queue", event)}
+          >
+            <span className="status">{"Pending"}</span>
           </div>
         </div>
         <div className="containerPost" id="posts">
